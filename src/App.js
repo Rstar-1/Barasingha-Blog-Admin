@@ -3,7 +3,6 @@ import Error from "./pages/error/Error";
 import Sidebar from "./pages/admin/sidebar/Sidebar";
 import Header from "./pages/admin/layouts/header/Header";
 import Dashboard from "./pages/admin/layouts/components/dashboard/Dashboard";
-import Crm from "./pages/admin/layouts/components/crm/Crm";
 
 const  App = () => {
   return (
@@ -19,7 +18,6 @@ const  App = () => {
               {/* ======================= Start-pages ======================= */}
               <Route path="/" element={<Dashboard />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/crm" element={<Crm />} />
               {/* ======================= End-pages ======================= */}
 
               {/* ======================= Start-Error ======================= */}
