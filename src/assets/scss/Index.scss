@@ -1,0 +1,393 @@
+/* ======================= Start-Color ======================= */
+$primary: #ff475b !important;
+$secondary: #335080 !important;
+$tertiary: #90a0b7 !important;
+$forth: #525252 !important;
+$success: #4bb543 !important;
+$warning: #ff5722 !important;
+$danger: red !important;
+$info: #2196f3 !important;
+$white: #fff !important;
+$dark: #000 !important;
+$gray: gray !important;
+/* ======================= End-Color ======================= */
+
+/* ======================= Start-Bg-Color ======================= */
+.bgprimary {
+  background: $primary;
+}
+.bgsecondary {
+  background: $secondary;
+}
+.bgtertiary {
+  background: $tertiary;
+}
+.bgforth {
+  background: $forth;
+}
+.bgsuccess {
+  background: $success;
+}
+.bgwarning {
+  background: $warning;
+}
+.bgdanger {
+  background: $danger;
+}
+.bginfo {
+  background: $info;
+}
+.bgwhite {
+  background: $white;
+}
+.bggray {
+  background: $gray;
+}
+.bgdark {
+  background: $dark;
+}
+.bg-ec {
+  background-color: #ececec !important;
+}
+.bg-purple {
+  background-color: #6610f2 !important;
+}
+.bg-f4f5f6 {
+  background: #f4f5f6 !important;
+}
+.bg-blues {
+  background-color: #000940 !important;
+}
+.bg-glass {
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.2px);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+}
+.liner-color {
+  background: linear-gradient(#e66465, #9198e5) !important;
+}
+.liner-color2 {
+  background: linear-gradient(0.25turn, #3f87a6, #f69d3c);
+}
+/* ======================= End-Bg-Color ======================= */
+
+/* ======================= Start-Text-Color ======================= */
+.textprimary {
+  color: $primary;
+}
+.textsecondary {
+  color: $secondary;
+}
+.texttertiary {
+  color: $tertiary;
+}
+.textforth {
+  color: $forth;
+}
+.textsuccess {
+  color: $success;
+}
+.textwarning {
+  color: $warning;
+}
+.textdanger {
+  color: $danger;
+}
+.textinfo {
+  color: $info;
+}
+.textwhite {
+  color: $white;
+}
+.textgray {
+  color: $gray;
+}
+.textdark {
+  color: $dark;
+}
+/* ======================= End-Text-Color ======================= */
+
+/* ======================= Start-Font-Family ======================= */
+@font-face {
+  font-family: "poppins-regular";
+  src: local("poppins-regular"),
+    url("../fonts/Poppins/Poppins-Regular.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  font-family: "poppins-regular" !important;
+}
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+button,
+input,
+li {
+  font-family: "poppins-regular" !important;
+}
+/* ======================= End-Font-Family ======================= */
+
+/* ======================= Start-scrollbar ======================= */
+::-webkit-scrollbar {
+  width: 0px;
+}
+/* ======================= End-scrollbar ======================= */
+
+/* ======================= Start-Button ======================= */
+.bgp-outline {
+  background: transparent !important;
+  border: 1px solid #335080 !important;
+  color: #335080 !important;
+}
+.bgp-outline:hover {
+  background: #335080 !important;
+  color: #fff !important;
+}
+/* ======================= End-Button ======================= */
+
+/* ======================= Start-Sidebar ======================= */
+.sidebar-logo {
+  width: 90px !important;
+  height: 100% !important;
+}
+.textsidebar{
+  color: gray;
+}
+.active{
+  color: $primary;
+}
+/* ======================= End-Sidebar ======================= */
+
+/* ======================= Start-Header ======================= */
+.header-logo {
+  width: 40px !important;
+  height: 40px !important;
+}
+.border-h {
+  border-radius: 0 0 0 10px !important;
+}
+/* ======================= End-Header ======================= */
+
+/* ======================= Start-dashboard ======================= */
+.border-d {
+  border-radius: 10px 0 0 0 !important;
+}
+.d-shadow {
+  box-shadow: 0 2px 12px 0 #0000001a !important;
+}
+.dash-logo {
+  width: 40px !important;
+  height: 40px !important;
+}
+.dash22-logo {
+  width: 45px !important;
+  height: 45px !important;
+}
+.leading{
+  line-height: 25px !important;
+}
+.next{
+  width: 30px !important;
+  height: 30px !important;
+  background: #f1f1f1 !important;
+  border-radius: 50% !important;
+}
+.dash-images{
+  width: 100% !important;
+  height: 150px !important;
+}
+/* ======================= End-dashboard ======================= */
+
+/* ======================= Start-crm ======================= */
+.crm-h{
+  height: 80vh !important;
+  overflow-y: auto !important;
+}
+/* ======================= End-crm ======================= */
+
+/* ======================= Start-loader ======================= */
+.loader {
+  border: 2px solid transparent;
+  border-radius: 50%;
+  border-top: 2px solid $tertiary;
+  border-bottom: 2px solid $tertiary;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+.loader2 {
+  border: 2px solid transparent;
+  border-radius: 50%;
+  border-top: 2px solid $tertiary;
+  border-bottom: 2px solid $tertiary;
+  width: 70px;
+  height: 70px;
+  animation: spins 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spins {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+/* ======================= End-loader ======================= */
+
+/* ======================= Start-Maincss ======================= */
+body {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none !important;
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+.list-none {
+  list-style: none !important;
+}
+.cursor-pointer {
+  cursor: pointer !important;
+}
+.error-h {
+  height: 90vh !important;
+  @media (max-width: 640px) {
+    height: 60vh !important;
+  }
+}
+.up-box {
+  width: 50px !important;
+  height: 50px !important;
+  @media (max-width: 640px) {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+.up-img {
+  width: 25px !important;
+  height: 25px !important;
+  @media (max-width: 640px) {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+.z-999 {
+  z-index: 9999 !important;
+}
+.h-100 {
+  height: 100vh !important;
+}
+.decimal {
+  list-style: decimal !important;
+}
+.disc {
+  list-style: disc !important;
+}
+.dot {
+  width: 12px !important;
+  height: 12px !important;
+}
+.border-0 {
+  border: none !important;
+}
+.border-ec {
+  border: 1px solid #ececec !important;
+}
+.bordb {
+  border-bottom: 1px solid #f4f5f6 !important;
+}
+.border-ec {
+  border: 1px solid #ececec !important;
+}
+.center-absolute {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+.input-css {
+  border: 1px solid #ececec !important;
+  height: 38px !important;
+  border-radius: 6px !important;
+  padding-left: 12px !important;
+}
+.w-side {
+  width: 17% !important;
+}
+.w-route {
+  width: 83% !important;
+}
+.cust-scroll{
+  height: 52vh !important;
+  overflow-y: auto !important;
+}
+.theads{
+  background: #f4f5f8 !important;
+  border: 1px solid #dcdfe6 !important;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #ececec;
+  text-align: left;
+  padding: 8px;
+}
+th {
+  background-color: #f4f5f8;
+}
+tr:nth-child(even):hover{
+ background-color: #fafafa;
+}
+.h-search{
+  height: 35px !important;
+}
+/* ======================= End-Maincss ======================= */
+
+/* ======================= Start-Animatedcss ======================= */
+.marquee p {
+  transform: translateX(100%);
+  animation: scroll-left 10s linear infinite;
+}
+@keyframes scroll-left {
+  0% {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  100% {
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}
+.clip {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%) !important;
+}
+.rotate-d {
+  transform: rotate(20deg) !important;
+}
+/* ======================= End-Animatedcss ======================= */
