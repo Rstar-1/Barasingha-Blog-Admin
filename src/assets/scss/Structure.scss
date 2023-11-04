@@ -9106,6 +9106,9 @@
 .flex-column {
   flex-direction: column !important;
 }
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
 .flex-row {
   flex-direction: row !important;
 }
@@ -9288,6 +9291,9 @@
   .md-flex-row {
     flex-direction: row !important;
   }
+  .md-flex-wrap {
+    flex-wrap: wrap !important;
+  }
   .md-flex-row-reverse {
     flex-direction: row-reverse !important;
   }
@@ -9467,6 +9473,9 @@
   }
   .sm-flex-row {
     flex-direction: row !important;
+  }
+  .sm-flex-wrap {
+    flex-wrap: wrap !important;
   }
   .sm-flex-row-reverse {
     flex-direction: row-reverse !important;
