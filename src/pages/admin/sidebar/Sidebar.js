@@ -14,7 +14,7 @@ const Sidebar = () => {
       id: 2,
       name: "Blog View",
       icon: "folder",
-      route: "crm",
+      route: "viewblog",
     },
   ];
   const sidebarmenu2 = [
@@ -22,19 +22,19 @@ const Sidebar = () => {
       id: 1,
       name: "Category",
       icon: "filter",
-      route: "blogs",
+      route: "category",
     },
     {
       id: 2,
       name: "Add Blogs",
       icon: "plus",
-      route: "elearning",
+      route: "add-blogs",
     },
     {
       id: 3,
       name: "Edit Blogs",
       icon: "edit",
-      route: "ecommerce",
+      route: "edit-blogs",
     },
   ];
   const sidebarmenu3 = [

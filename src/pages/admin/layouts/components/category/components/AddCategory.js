@@ -1,15 +1,15 @@
 import React from 'react'
 
-const BlogStatus = () => {
+const AddCategory = () => {
   return (
     <div>
       <div className="mtpx6 grid-cols-1 gap-12">
         <div className="w-full">
-          <label className="fsize13 textforth">Status</label>
+          <label className="fsize13 textforth">Category</label>
           <div>
             <input
               className="side-input mtpx5 h-input fsize13 rounded-5 plpx10 border-ec"
-              placeholder="Enter Status"
+              placeholder="Enter Category"
             />
           </div>
         </div>
@@ -23,4 +23,4 @@ const BlogStatus = () => {
   );
 }
 
-export default BlogStatus;
+export default AddCategory

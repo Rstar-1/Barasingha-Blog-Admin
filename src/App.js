@@ -3,13 +3,10 @@ import Error from "./pages/error/Error";
 import Sidebar from "./pages/admin/sidebar/Sidebar";
 import Header from "./pages/admin/layouts/header/Header";
 import Dashboard from "./pages/admin/layouts/components/dashboard/Dashboard";
-import Crm from "./pages/admin/layouts/components/crm/Crm";
-import Blog from "./pages/admin/layouts/components/blog/Blog";
-import Elearning from "./pages/admin/layouts/components/elearning/Elearning";
-import Ecommerce from "./pages/admin/layouts/components/ecommerce/Ecommerce";
-import Seo from "./pages/admin/layouts/components/seo/Seo";
-import CMS from "./pages/admin/layouts/components/cms/CmsPages"
-import Billing from "./pages/admin/layouts/components/billing/Billing";
+import ViewBlog from "./pages/admin/layouts/components/viewblogs/ViewBlog";
+import Category from "./pages/admin/layouts/components/category/Category";
+import AddBlog from "./pages/admin/layouts/components/addblogs/AddBlog";
+import EditBlog from "./pages/admin/layouts/components/editblogs/EditBlog";
 
 const  App = () => {
   return (
@@ -25,15 +22,10 @@ const  App = () => {
               {/* ======================= Start-pages ======================= */}
               <Route path="/" element={<Dashboard />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/crm" element={<Crm />} />
-              <Route path="/blogs" element={<Blog />} />
-              <Route path="/elearning" element={<Elearning />} />
-              <Route path="/ecommerce" element={<Ecommerce />} />
-              <Route path="/elearning" element={<Elearning />} />
-              <Route path="/cms" element={<CMS />} />
-              <Route path="/seo" element={<Seo />} />
-              <Route path="/cms" element={<CMS />} />
-              <Route path="/billing" element={<Billing />} />
+              <Route path="/viewblog" element={<ViewBlog />} />
+              <Route path="/category" element={<Category />} />
+              <Route path="/add-blogs" element={<AddBlog />} />
+              <Route path="/edit-blogs" element={<EditBlog />} />
               {/* ======================= End-pages ======================= */}
 
               {/* ======================= Start-Error ======================= */}
