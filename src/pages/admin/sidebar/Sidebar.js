@@ -41,14 +41,14 @@ const Sidebar = () => {
     {
       id: 1,
       name: "Blog Version",
-      icon: "user-plus",
-      route: "cms",
+      icon: "folder-plus",
+      route: "version",
     },
     {
       id: 2,
       name: "Documentation",
       icon: "file",
-      route: "seo",
+      route: "documentation",
     },
   ];
   return (
