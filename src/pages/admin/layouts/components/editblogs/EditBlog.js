@@ -1,64 +1,152 @@
-import React from "react";
-import Select from "react-select";
+import React, { useState, useEffect, useContext } from "react";
+import FeatherIcon from "feather-icons-react";
+import { deldata } from "../../../../../ContextProvider/Context";
+import { NavLink } from "react-router-dom";
 
 const EditBlog = () => {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+  const [getuserdata, setUserdata] = useState([]);
+  console.log(getuserdata);
+  const { dltdata, setDLTdata } = useContext(deldata);
+  console.log(dltdata);
+
+  const getdata = async () => {
+    const res = await fetch("http://localhost:8000/api/getdata", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (res.status === 422 || !data) {
+      console.log("error ");
+    } else {
+      setUserdata(data);
+      console.log("get data");
+    }
+  };
+
+  useEffect(() => {
+    getdata();
+  }, []);
+
+  const deleteuser = async (id) => {
+    const res2 = await fetch(`http://localhost:8000/api/deletedata/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const deletedata = await res2.json();
+    console.log(deletedata);
+
+    if (res2.status === 422 || !deletedata) {
+      console.log("error");
+    } else {
+      console.log("user deleted");
+      setDLTdata(deletedata);
+      getdata();
+    }
+  };
+
   return (
     <div className="bgwhite border-d mtpx9 cust-scroll p20">
-      <h6 className="fsize20 textprimary mtpx1 mbpx1 font-600">Edit Blogs</h6>
-      <p className="mtpx2 textgray fsize13">
-        In publishing and graphic design, Lorem ipsum is a placeholder text
-        commonly used to content.
-      </p>
-      <div className="mtpx18">
-        <div className="grid-cols-1 w-60 gap-12">
-          <div className="w-full">
-            <label className="fsize13 textforth">Image</label>
-            <div>
+      <h6 className="fsize20 textprimary mtpx1 mbpx1 font-600">
+        Edit Blogs
+      </h6>
+      <div className="mtpx18 rounded-10 border-ec p20">
+        <div className="mtpx5 mbpx15 flex gap-12 items-center">
+          <div className="w-60">
+            <div className="relative">
               <input
-                className="side-input mtpx5 h-input fsize13 rounded-5 plpx10 border-ec"
-                placeholder="Enter"
+                className="w-full h-input fsize14 rounded-5 plpx10 border-ec"
+                placeholder="Search"
               />
-            </div>
-          </div>
-          <div className="w-full">
-            <label className="fsize13 textforth">Title</label>
-            <div>
-              <input
-                className="side-input mtpx5 h-input fsize13 rounded-5 plpx10 border-ec"
-                placeholder="Enter Title"
-              />
-            </div>
-          </div>
-          <div className="w-full">
-            <label className="fsize13 textforth">Category</label>
-            <div>
-              <Select
-                className="category-input mtpx5 fsize14"
-                placeholder="Category"
-                options={options}
-              />
-            </div>
-          </div>
-          <div className="w-full">
-            <label className="fsize13 textforth">Description</label>
-            <div>
-              <textarea
-                className="textarea-input mtpx5 h-input fsize13 rounded-5 p10 border-ec"
-                placeholder="Enter Description"
-              ></textarea>
+              <div className="absolute top-0 right-0 mtpx9 mrpx2">
+                <FeatherIcon
+                  icon="search"
+                  className="textgray cursor-pointer"
+                  size={20}
+                />
+              </div>
             </div>
           </div>
         </div>
-        <div className="mtpx15">
-          <button className="border-0 cursor-pointer font-500 textwhite rounded-5 ptpx6 pbpx6 plpx25 prpx25 fsize13 bgprimary">
-            Submit
-          </button>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th className="fsize13 w-10 textwhite font-300">
+                <p>Image</p>
+              </th>
+              <th className="fsize13 w-20 textwhite font-300">
+                <p>Title</p>
+              </th>
+              <th className="fsize13 w-10 textwhite font-300">
+                <p>Description</p>
+              </th>
+              <th className="fsize13 w-20 textwhite font-300">
+                <p>Category</p>
+              </th>
+              <th className="fsize13 w-20 textwhite font-300">
+                <p>Created Date</p>
+              </th>
+              <th className="fsize13 w-10 textwhite font-300">
+                <p>Action</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {getuserdata.map((e, id) => {
+              return (
+                <>
+                  <tr>
+                    <td className="fsize13 w-10 textforth">
+                      <img
+                        src={e.img}
+                        alt="logo"
+                        className="edit-img bg-light-primary rounded-5 object-contain"
+                      />
+                    </td>
+                    <td className="fsize13 w-20 textforth">
+                      <p>{e.title}</p>
+                    </td>
+                    <td className="fsize13 w-20 textforth">
+                      <p>{e.desc}</p>
+                    </td>
+                    <td className="w-10 textforth">
+                      <p className="prpx15 plpx15 ptpx3 pbpx3 fsize12 rounded-20 textprimary bg-light-primary w-max">
+                        {e.category}
+                      </p>
+                    </td>
+                    <td className="fsize12 w-20 textforth">
+                      <p>{e.createdAt}</p>
+                    </td>
+                    <td className="fsize13 w-10 textforth plpx15">
+                      <div className="flex items-center gap-5">
+                        <NavLink className="mtpx7" to={`/update/${e._id}`}>
+                          <FeatherIcon
+                            icon="edit"
+                            className="textgray cursor-pointer"
+                            size={16}
+                          />
+                        </NavLink>
+                        <FeatherIcon
+                          onClick={() => deleteuser(e._id)}
+                          icon="trash"
+                          className="textgray cursor-pointer"
+                          size={16}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                </>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );

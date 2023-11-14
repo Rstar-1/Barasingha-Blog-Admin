@@ -8,6 +8,7 @@ import Category from "./pages/admin/layouts/components/category/Category";
 import AddBlog from "./pages/admin/layouts/components/addblogs/AddBlog";
 import EditBlog from "./pages/admin/layouts/components/editblogs/EditBlog";
 import Version from "./pages/admin/layouts/components/version/Version";
+import Update from "./pages/admin/layouts/components/editblogs/components/Update";
 
 const  App = () => {
   return (
@@ -27,6 +28,7 @@ const  App = () => {
               <Route path="/category" element={<Category />} />
               <Route path="/add-blogs" element={<AddBlog />} />
               <Route path="/edit-blogs" element={<EditBlog />} />
+              <Route path="/update/:id" element={<Update />} />
               <Route path="/version" element={<Version />} />
               {/* ======================= End-pages ======================= */}
 

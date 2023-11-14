@@ -12,17 +12,17 @@ const Sidebar = () => {
     },
     {
       id: 2,
-      name: "Blog View",
-      icon: "folder",
-      route: "viewblog",
+      name: "User Stories",
+      icon: "user",
+      route: "userstory",
     },
   ];
   const sidebarmenu2 = [
     {
       id: 1,
-      name: "Category",
-      icon: "filter",
-      route: "category",
+      name: "Blog View",
+      icon: "folder",
+      route: "viewblog",
     },
     {
       id: 2,
@@ -62,8 +62,8 @@ const Sidebar = () => {
           />
         </div>
         <div className="ptpx10 pbpx10 plpx10 prpx10">
-          <div class="accordion">
-            <div class="tab">
+          <div className="accordion">
+            <div className="tab">
               <input type="checkbox" name="accordion-1" id="cb1" />
               <label
                 for="cb1"
@@ -84,7 +84,7 @@ const Sidebar = () => {
                   <FeatherIcon size="16" icon="chevron-right" />
                 </div>
               </label>
-              <div class="tab__content">
+              <div className="tab__content">
                 <div className="grid grid-cols-1 p9 gap-12">
                   {sidebarmenu.map((e) => (
                     <NavLink
@@ -103,7 +103,7 @@ const Sidebar = () => {
                 </div>
               </div>
             </div>
-            <div class="tab">
+            <div className="tab">
               <input type="checkbox" name="accordion-2" id="cb2" />
               <label
                 for="cb2"
@@ -124,7 +124,7 @@ const Sidebar = () => {
                   <FeatherIcon size="16" icon="chevron-right" />
                 </div>
               </label>
-              <div class="tab__content">
+              <div className="tab__content">
                 <div className="grid grid-cols-1 p9 gap-12">
                   {sidebarmenu2.map((e) => (
                     <NavLink
