@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import FeatherIcon from "feather-icons-react";
-import { deldata } from "../../../../../ContextProvider/Context";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const EditBlog = () => {
   const [getuserdata, setUserdata] = useState([]);
+  const [deltedata, setdeltedata] = useState("");
+  console.log(deltedata);
   console.log(getuserdata);
-  const { dltdata, setDLTdata } = useContext(deldata);
-  console.log(dltdata);
 
   const getdata = async () => {
     const res = await fetch("http://localhost:8000/api/getdata", {
@@ -31,26 +31,20 @@ const EditBlog = () => {
   useEffect(() => {
     getdata();
   }, []);
-
-  const deleteuser = async (id) => {
-    const res2 = await fetch(`http://localhost:8000/api/deletedata/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const deletedata = await res2.json();
-    console.log(deletedata);
-
-    if (res2.status === 422 || !deletedata) {
-      console.log("error");
-    } else {
-      console.log("user deleted");
-      setDLTdata(deletedata);
-      getdata();
-    }
-  };
+ const deleteuser = async (id) => {
+   const deleteres = await axios({
+     method: "delete",
+     url: `http://localhost:8000/api/deletedata/${id}`,
+   });
+   setdeltedata(deleteres);
+   console.log(deleteres, "delete");
+   if (deleteres.status === 201) {
+     alert("delete data");
+     window.location.reload(true);
+   } else {
+     alert("Category Not Submitted");
+   }
+ };
 
   return (
     <div className="bgwhite border-d mtpx9 cust-scroll p20">
@@ -114,7 +108,7 @@ const EditBlog = () => {
                       <p>{e.title}</p>
                     </td>
                     <td className="fsize13 w-20 textforth">
-                      <p>{e.desc}</p>
+                      <p className="line-clamp2">{e.desc}</p>
                     </td>
                     <td className="w-10 textforth">
                       <p className="prpx15 plpx15 ptpx3 pbpx3 fsize12 rounded-20 textprimary bg-light-primary w-max">
@@ -122,7 +116,7 @@ const EditBlog = () => {
                       </p>
                     </td>
                     <td className="fsize12 w-20 textforth">
-                      <p>{e.createdAt}</p>
+                      <p>{new Date(e.createdAt).toDateString()}</p>
                     </td>
                     <td className="fsize13 w-10 textforth plpx15">
                       <div className="flex items-center gap-5">

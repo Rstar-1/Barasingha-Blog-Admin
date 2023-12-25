@@ -5,10 +5,13 @@ import Header from "./pages/admin/layouts/header/Header";
 import Dashboard from "./pages/admin/layouts/components/dashboard/Dashboard";
 import ViewBlog from "./pages/admin/layouts/components/viewblogs/ViewBlog";
 import Category from "./pages/admin/layouts/components/category/Category";
+import EditCategory from "./pages/admin/layouts/components/category/components/EditCategory";
 import AddBlog from "./pages/admin/layouts/components/addblogs/AddBlog";
 import EditBlog from "./pages/admin/layouts/components/editblogs/EditBlog";
 import Version from "./pages/admin/layouts/components/version/Version";
 import Update from "./pages/admin/layouts/components/editblogs/components/Update";
+import InactiveBlog from "./pages/admin/layouts/components/inactiveblog/InactiveBlog";
+import ActiveBlog from "./pages/admin/layouts/components/activeblog/ActiveBlog";
 
 const  App = () => {
   return (
@@ -24,12 +27,21 @@ const  App = () => {
               {/* ======================= Start-pages ======================= */}
               <Route path="/" element={<Dashboard />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/viewblog" element={<ViewBlog />} />
+              {/* start-Category */}
               <Route path="/category" element={<Category />} />
+              <Route path="/editcategory/:id" element={<EditCategory />} />
+              {/* End-Category */}
+              {/* start-Blogs */}
+              <Route path="/viewblog" element={<ViewBlog />} />
               <Route path="/add-blogs" element={<AddBlog />} />
               <Route path="/edit-blogs" element={<EditBlog />} />
               <Route path="/update/:id" element={<Update />} />
+              <Route path="/inactive-blogs" element={<InactiveBlog />} />
+              <Route path="/active-blogs" element={<ActiveBlog />} />
+              {/* End-Blogs */}
+              {/* Start-Version */}
               <Route path="/version" element={<Version />} />
+              {/* End-Version */}
               {/* ======================= End-pages ======================= */}
 
               {/* ======================= Start-Error ======================= */}

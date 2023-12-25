@@ -7,7 +7,7 @@ const Version = () => {
     <div className="bgwhite border-d mtpx9 cust-scroll p20">
       <div className="">
         <h6 className="fsize20 textprimary mtpx1 mbpx1 font-600">
-          Blogs Version
+          Blogs Website Version
         </h6>
         <p className="mtpx2 textgray fsize13">
           In publishing and graphic design, Lorem ipsum is a placeholder text
@@ -54,7 +54,7 @@ const Version = () => {
       </div>
       <div className="mtpx10">
         <h6 className="fsize20 textprimary mtpx1 mbpx1 font-600">
-          Blogs Version
+          Blogs Admin Version
         </h6>
         <p className="mtpx2 textgray fsize13">
           In publishing and graphic design, Lorem ipsum is a placeholder text

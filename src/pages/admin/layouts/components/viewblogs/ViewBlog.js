@@ -1,25 +1,15 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const ViewBlog = () => {
   const [getuserdata, setUserdata] = useState([]);
   console.log(getuserdata);
   const getdata = async () => {
-    const res = await fetch("http://localhost:8000/api/getdata", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const response = await axios({
+      method: "get",
+      url: "http://localhost:8000/api/getdata",
     });
-
-    const data = await res.json();
-    console.log(data);
-
-    if (res.status === 422 || !data) {
-      console.log("error ");
-    } else {
-      setUserdata(data);
-      console.log("get data");
-    }
+    setUserdata(response.data);
   };
   useEffect(() => {
     getdata();
@@ -35,16 +25,18 @@ const ViewBlog = () => {
             <img
               src={element.img}
               alt="logo"
-              className="viewimg bg-light-primary rounded-5 object-contain"
+              className="viewimg bg-light-primary rounded-5 object-cover"
             />
             <div className="p5">
               <small className="prpx15 plpx15 ptpx3 pbpx3 fsize12 rounded-20 textprimary bg-light-primary w-max">
                 {element.category}
               </small>
               <h3 className="mtpx5 fsize17 mbpx1 textforth">{element.title}</h3>
-              <p className="mtpx2 textgray fsize13">{element.desc}</p>
+              <p className="mtpx2 textgray fsize13 line-clamp3">{element.desc}</p>
               <div className="mtpx8 flex justify-end w-full">
-                <p className=" textgray fsize11">{element.createdAt}</p>
+                <p className=" textgray fsize11">
+                  {new Date(element.createdAt).toDateString()}
+                </p>
               </div>
             </div>
           </div>

@@ -9666,23 +9666,32 @@
   object-fit: contain !important;
 }
 .object-cover {
-  object-fit: contain !important;
+  object-fit: cover !important;
+}
+.object-fill {
+  object-fit: fill !important;
 }
 @media (max-width: 768px) and (min-width: 641px) {
   .md-object-contain {
     object-fit: contain !important;
   }
   .md-object-cover {
-    object-fit: contain !important;
+    object-fit: cover !important;
   }
+  .md-object-fill {
+  object-fit: fill !important;
+}
 }
 @media (max-width: 640px) {
   .sm-object-contain {
     object-fit: contain !important;
   }
   .sm-object-cover {
-    object-fit: contain !important;
+    object-fit: cover !important;
   }
+  .sm-object-fill {
+  object-fit: fill !important;
+}
 }
 /* ======================= End-fit ======================= */
 
@@ -10056,3 +10065,100 @@
   box-shadow: none !important;
 }
 /* ======================= End-shadow ======================= */
+
+/* ======================= Start-Clamp ======================= */
+.line-clamp1 {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 1 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.line-clamp2 {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.line-clamp3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.line-clamp4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.line-clamp5 {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 5 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+@media (max-width: 768px) and (min-width: 641px) {
+  .md-line-clamp1 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .md-line-clamp2 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .md-line-clamp3 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .md-line-clamp4 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .md-line-clamp5 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 5 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+}
+@media (max-width: 640px) {
+   .sm-line-clamp1 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .sm-line-clamp2 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .sm-line-clamp3 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .sm-line-clamp4 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .sm-line-clamp5 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 5 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+}
+/* ======================= End-Clamp ======================= */

@@ -1,11 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FeatherIcon from "feather-icons-react";
 import AddCategory from "./components/AddCategory";
-import EditCategory from "./components/EditCategory";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 const Category = () => {
   const [categorysidebar, setcategorysidebar] = useState(false);
-  const [editcategorysidebar, seteditcategorysidebar] = useState(false);
+  const [getuserdata, setUserdata] = useState([]);
+  const [deltedata, setdeltedata] = useState("");
+  console.log(deltedata);
+
+  const getdata = async () => {
+    const response = await axios({
+      method: "get",
+      url: "http://localhost:8000/api/blogcategoryalldata",
+    });
+    setUserdata(response.data);
+  };
+  const deleteuser = async (id) => {
+    const deleteres = await axios({
+      method: "delete",
+      url: `http://localhost:8000/api/blogcategorydelete/${id}`,
+    });
+    setdeltedata(deleteres);
+    console.log(deleteres, "delete");
+     if (deleteres.status === 201) {
+       alert("delete data");
+       window.location.reload(true);
+     } else {
+       alert("Category Not Submitted");
+     }
+  };
+  useEffect(() => {
+    getdata();
+  }, []);
   return (
     <div className="bgwhite border-d mtpx9 cust-scroll p20">
       {categorysidebar ? (
@@ -26,28 +54,6 @@ const Category = () => {
             </div>
             <div className="p10 side-scroll">
               <AddCategory />
-            </div>
-          </div>
-        </div>
-      ) : null}
-      {editcategorysidebar ? (
-        <div className="bg-glass2 fixed top-0 right-0 h-100 w-full z-99">
-          <div className="bgwhite d-shadow sidebar-w h-100 absolute right-0 top-0">
-            <div className="bgprimary p5">
-              <div className="flex items-center justify-between gap-4 plpx7 prpx7">
-                <p className="fsize15 textwhite mtpx4 mbpx4 cursor-pointer font-500">
-                  Edit Category
-                </p>
-                <FeatherIcon
-                  icon="x"
-                  className="textwhite cursor-pointer"
-                  size={17}
-                  onClick={() => seteditcategorysidebar(false)}
-                />
-              </div>
-            </div>
-            <div className="p10 side-scroll">
-              <EditCategory />
             </div>
           </div>
         </div>
@@ -94,11 +100,14 @@ const Category = () => {
               <th className="fsize13 w-10 textwhite font-300">
                 <p>ID</p>
               </th>
-              <th className="fsize13 w-50 textwhite font-300">
+              <th className="fsize13 w-40 textwhite font-300">
                 <p>Category Name</p>
               </th>
-              <th className="fsize13 w-30 textwhite font-300">
+              <th className="fsize13 w-20 textwhite font-300">
                 <p>Created Date</p>
+              </th>
+              <th className="fsize13 w-20 textwhite font-300">
+                <p>Udated Date</p>
               </th>
               <th className="fsize13 w-10 textwhite font-300">
                 <p>Actions</p>
@@ -106,63 +115,39 @@ const Category = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="fsize13 w-10 textforth">
-                <p>1</p>
-              </td>
-              <td className="fsize13 w-50 textforth">
-                <p>Lorem</p>
-              </td>
-              <td className="fsize13 w-30 textforth">
-                <p>12/12/2023</p>
-              </td>
-              <td className="fsize13 w-10 textforth plpx15">
-                <FeatherIcon
-                  icon="edit"
-                  className="textgray cursor-pointer"
-                  onClick={() => seteditcategorysidebar(true)}
-                  size={16}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td className="fsize13 w-10 textforth">
-                <p>2</p>
-              </td>
-              <td className="fsize13 w-50 textforth">
-                <p>Lorem</p>
-              </td>
-              <td className="fsize13 w-30 textforth">
-                <p>12/12/2023</p>
-              </td>
-              <td className="fsize13 w-10 textforth plpx15">
-                <FeatherIcon
-                  icon="edit"
-                  className="textgray cursor-pointer"
-                  onClick={() => setcategorysidebar(true)}
-                  size={16}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td className="fsize13 w-10 textforth">
-                <p>3</p>
-              </td>
-              <td className="fsize13 w-50 textforth">
-                <p>Lorem</p>
-              </td>
-              <td className="fsize13 w-30 textforth">
-                <p>12/12/2023</p>
-              </td>
-              <td className="fsize13 w-10 textforth plpx15">
-                <FeatherIcon
-                  icon="edit"
-                  className="textgray cursor-pointer"
-                  onClick={() => setcategorysidebar(true)}
-                  size={16}
-                />
-              </td>
-            </tr>
+            {getuserdata.map((e, id) => (
+              <tr>
+                <td className="fsize13 w-10 textforth">
+                  <p>{id + 1}</p>
+                </td>
+                <td className="fsize13 w-40 textforth">
+                  <p>{e.category}</p>
+                </td>
+                <td className="fsize13 w-20 textforth">
+                  <p>{new Date(e.createdAt).toDateString()}</p>
+                </td>
+                <td className="fsize13 w-20 textforth">
+                  <p>{new Date(e.updatedAt).toDateString()}</p>
+                </td>
+                <td className="fsize13 w-10 textforth plpx15">
+                  <NavLink to={`/editcategory/${e._id}`}>
+                    {" "}
+                    <FeatherIcon
+                      icon="edit"
+                      className="textgray cursor-pointer"
+                      size={16}
+                    />
+                  </NavLink>
+
+                  <FeatherIcon
+                    onClick={() => deleteuser(e._id)}
+                    icon="trash"
+                    className="textgray mlpx4 cursor-pointer"
+                    size={16}
+                  />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

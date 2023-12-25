@@ -387,6 +387,19 @@ tr:nth-child(even):hover {
 .side-input {
   width: 95% !important;
 }
+.border-images {
+  border: 1px dashed #3d3c3c !important;
+  height: 190px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 10px !important;
+}
+.img-input {
+  width: 93.5% !important;
+  height: 190px !important;
+  opacity: 0 !important;
+}
 .category-input {
   width: 97% !important;
 }
@@ -444,6 +457,10 @@ tr:nth-child(even):hover {
   width: 20px !important;
   height: 20px !important;
 }
+.sidebar-img{
+  width: 120px !important;
+  height: 120px !important;
+}
 /* ======================= End-Sidebar ======================= */
 
 /* ======================= Start-Header ======================= */
@@ -497,9 +514,10 @@ tr:nth-child(even):hover {
 
 /* ======================= Start-EditBlog ======================= */
 .edit-img {
-  width: 100%!important;
+  width: 100% !important;
   height: 50px !important;
 }
+
 /* ======================= End-EditBlog ======================= */
 
 /* ======================= Start-Version ======================= */
