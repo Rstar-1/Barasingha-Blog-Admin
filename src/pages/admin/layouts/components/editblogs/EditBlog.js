@@ -1,56 +1,108 @@
 import React, { useState, useEffect } from "react";
-import FeatherIcon from "feather-icons-react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import ReactPaginate from "react-paginate";
+import FeatherIcon from "feather-icons-react";
 
 const EditBlog = () => {
+  // API UseState Data
   const [getuserdata, setUserdata] = useState([]);
   const [deltedata, setdeltedata] = useState("");
   console.log(deltedata);
-  console.log(getuserdata);
+  // Search UseState Data
+  const [search, setsearchdata] = useState("");
+  // Pagination UseState Data
+  const [pageCount, setpageCount] = useState(0);
+  const [offset, setOffset] = useState(0);
 
+  // API Call
   const getdata = async () => {
-    const res = await fetch("http://localhost:8000/api/getdata", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const payload = {};
+    if (search) {
+      Object.assign(payload, { search: search });
+    }
+    if (offset) {
+      Object.assign(payload, { offset: offset });
+    }
+    try {
+      const response = await axios({
+        method: "post",
+        url: "http://localhost:8000/api/getblogdata",
+        data: payload, // Pass the payload as data in the POST request
+      });
+
+      setUserdata(response.data.data);
+      setpageCount(Math.ceil(response.data.totalCount / 4));
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // Handle the error as needed
+    }
+  };
+  const deleteuser = async (id) => {
+    const deleteres = await axios({
+      method: "delete",
+      url: `http://localhost:8000/api/deleteblogdata/${id}`,
     });
-
-    const data = await res.json();
-    console.log(data);
-
-    if (res.status === 422 || !data) {
-      console.log("error ");
+    setdeltedata(deleteres);
+    console.log(deleteres, "delete");
+    if (deleteres.status === 201) {
+      alert("delete data");
+      window.location.reload(true);
     } else {
-      setUserdata(data);
-      console.log("get data");
+      alert("Category Not Submitted");
     }
   };
 
+  // Function
+  const handlePageClick = (event) => {
+    console.log(event, "handle");
+    let page = event.selected + 1;
+    const curoffset = page > 1 ? (page - 1) * 4 : 0;
+    setOffset(curoffset);
+
+    getdata();
+  };
+  const statustrue = async (e) => {
+    const payload = {
+      status: false,
+    };
+    const editresponse = await axios({
+      method: "patch",
+      url: `http://localhost:8000/api/updatebasicdata/${e}`,
+      data: payload,
+    });
+    //setupdate(editresponse);
+    if (editresponse.status === 201) {
+      window.location.reload(true);
+    } else {
+      alert("Category Not Submitted");
+    }
+  };
+  const statusfalse = async (e) => {
+    const payload = {
+      status: true,
+    };
+    const editresponse = await axios({
+      method: "patch",
+      url: `http://localhost:8000/api/updatebasicdata/${e}`,
+      data: payload,
+    });
+    //setupdate(editresponse);
+    if (editresponse.status === 201) {
+      window.location.reload(true);
+    } else {
+      alert("Category Not Submitted");
+    }
+  };
+
+  // Render API
   useEffect(() => {
     getdata();
-  }, []);
- const deleteuser = async (id) => {
-   const deleteres = await axios({
-     method: "delete",
-     url: `http://localhost:8000/api/deletedata/${id}`,
-   });
-   setdeltedata(deleteres);
-   console.log(deleteres, "delete");
-   if (deleteres.status === 201) {
-     alert("delete data");
-     window.location.reload(true);
-   } else {
-     alert("Category Not Submitted");
-   }
- };
+  }, [search]);
 
   return (
     <div className="bgwhite border-d mtpx9 cust-scroll p20">
-      <h6 className="fsize20 textprimary mtpx1 mbpx1 font-600">
-        Edit Blogs
-      </h6>
+      <h6 className="fsize20 textprimary mtpx1 mbpx1 font-600">Edit Blogs</h6>
       <div className="mtpx18 rounded-10 border-ec p20">
         <div className="mtpx5 mbpx15 flex gap-12 items-center">
           <div className="w-60">
@@ -58,6 +110,7 @@ const EditBlog = () => {
               <input
                 className="w-full h-input fsize14 rounded-5 plpx10 border-ec"
                 placeholder="Search"
+                onChange={(e) => setsearchdata(e.target.value)}
               />
               <div className="absolute top-0 right-0 mtpx9 mrpx2">
                 <FeatherIcon
@@ -99,7 +152,7 @@ const EditBlog = () => {
                   <tr>
                     <td className="fsize13 w-10 textforth">
                       <img
-                        src={e.img}
+                        src={e.picture}
                         alt="logo"
                         className="edit-img bg-light-primary rounded-5 object-contain"
                       />
@@ -141,6 +194,18 @@ const EditBlog = () => {
             })}
           </tbody>
         </table>
+        <div className="flex w-full justify-end">
+          <ReactPaginate
+            className="pagination"
+            breakLabel="..."
+            nextLabel=">"
+            previousLabel="<"
+            pageCount={pageCount}
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={4}
+            renderOnZeroPageCount={null}
+          />
+        </div>
       </div>
     </div>
   );

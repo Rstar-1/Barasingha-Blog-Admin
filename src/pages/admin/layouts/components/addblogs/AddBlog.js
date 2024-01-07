@@ -1,71 +1,91 @@
+import React, { useState } from "react";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
 import FeatherIcon from "feather-icons-react";
+// Pages
+import AddSuccess from "../popup/AddSuccess";
+import RemoveError from "../popup/RemoveError";
 
 const AddBlog = () => {
-  const [getuserdata, setUserdata] = useState([]);
-  console.log(getuserdata);
+  // Form UseState
   const [Title, StepTitle] = useState("");
   const [Desc, StepDesc] = useState("");
   const [Category, StepCategory] = useState("");
+  const [Image, setImage] = useState(null);
 
-  const getdata = async () => {
-    const res = await fetch("http://localhost:8000/api/getdata", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  // Success Popup
+  const [Success, setSuccess] = useState(false);
 
-    const data = await res.json();
-    console.log(data);
+  // Error Popup
+  const [Error, setError] = useState(false);
 
-    if (res.status === 422 || !data) {
-      console.log("error");
-    } else {
-      setUserdata(data);
-      console.log("get data");
-    }
-  };
+  // Function
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-    console.log(e.target.files[0]);
+    setImage(e.target.files[0]);
   };
-  const handleFileChange2 = (e) => {
-    setFile2(e.target.files[0]);
-    console.log(e.target.files[0]);
-  };
-  const [file, setFile] = useState(null);
-  const [file2, setFile2] = useState(null);
-  useEffect(() => {
-    getdata();
-  }, []);
- 
+
+  // API Call
   const addUserdata = async (e) => {
     e.preventDefault();
-    console.log(file, "ttile");
     const formData = new FormData();
-    formData.append("image1", file);
-    formData.append("image2", file2);
+    formData.append("image", Image);
     formData.append("title", Title);
     formData.append("desc", Desc);
     formData.append("category", Category);
     const response = await axios({
       method: "post",
       url: "http://localhost:8000/api/blogregister",
-      data:formData,
-      
-    }); 
-     console.log(response.data);
-     if (response.status === 201) {
-       alert("completeda");
-     } else {
-       alert("add Not Submitted");
-     }
+      data: formData,
+    });
+    console.log(response.data);
+    if (response.status === 201) {
+      setSuccess(true);
+    } else {
+      setError(true);
+    }
   };
 
   return (
     <div className="bgwhite border-d mtpx9 cust-scroll p20">
+      {/* ============== Success Popup ============== */}
+      {Success ? (
+        <div className="bg-glass2 fixed top-0 right-0 h-100 w-full z-99">
+          <div className="bgwhite d-shadow w-30 absolute center-absolute rounded-10">
+            <div className="p15">
+              <div className="flex items-center justify-end gap-4">
+                <FeatherIcon
+                  icon="x"
+                  className="textprimary cursor-pointer"
+                  size={20}
+                  onClick={() => setSuccess(false)}
+                />
+              </div>
+            </div>
+            <AddSuccess />
+          </div>
+        </div>
+      ) : null}
+      {/* ============== Success Popup ============== */}
+
+      {/* ============== Error Popup ============== */}
+      {Error ? (
+        <div className="bg-glass2 fixed top-0 right-0 h-100 w-full z-99">
+          <div className="bgwhite d-shadow w-30 absolute center-absolute rounded-10">
+            <div className="p15">
+              <div className="flex items-center justify-end gap-4">
+                <FeatherIcon
+                  icon="x"
+                  className="textprimary cursor-pointer"
+                  size={20}
+                  onClick={() => setError(false)}
+                />
+              </div>
+            </div>
+            <RemoveError />
+          </div>
+        </div>
+      ) : null}
+      {/* ============== Error Popup ============== */}
+
       <h6 className="fsize20 textprimary mtpx1 mbpx1 font-600">Add Blogs</h6>
       <p className="mtpx2 textgray fsize13">
         In publishing and graphic design, Lorem ipsum is a placeholder text
@@ -89,29 +109,8 @@ const AddBlog = () => {
                 placeholder="Enter"
                 type="file"
                 onChange={handleFileChange}
-                name="img"
-                id="img"
-              />
-            </div>
-          </div>
-          <div className="w-full">
-            <label className="fsize13 textforth">Image</label>
-            <div className="relative">
-              <div className="border-images side-input mtpx3">
-                <div className="text-center flex justify-center">
-                  <div>
-                    <FeatherIcon icon="upload-cloud" size={35} />
-                    <p className="textforth">Upload Here</p>
-                  </div>
-                </div>
-              </div>
-              <input
-                className="absolute top-0 left-0 img-input h-full fsize13 rounded-5 plpx10 border-ec"
-                placeholder="Enter"
-                type="file"
-                onChange={handleFileChange2}
-                name="img2"
-                id="img2"
+                name="imageblog"
+                id="imageblog"
               />
             </div>
           </div>

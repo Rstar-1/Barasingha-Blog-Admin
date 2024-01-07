@@ -1,29 +1,27 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FeatherIcon from "feather-icons-react"
 
 const EditBlog = () => {
+  const history = useNavigate();
+  // Form UseState
   const [Title, StepTitle] = useState("");
   const [Desc, StepDesc] = useState("");
   const [Category, StepCategory] = useState("");
-  const [imagenew1, SetImage1] = useState("");
-  const [imagenew2, SetImage2] = useState("");
+  const [image, SetImage] = useState("");
+  const [File, setFile] = useState(null);
 
+  // Function
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     console.log(e.target.files[0]);
   };
-  const handleFileChange2 = (e) => {
-    setFile2(e.target.files[0]);
-    console.log(e.target.files[0]);
-  };
-  const [file, setFile] = useState(null);
-  const [file2, setFile2] = useState(null);
 
   const { id } = useParams("");
   console.log(id);
 
+  // API Call
   const getsingledata = async () => {
     const editresponse = await axios({
       method: "get",
@@ -32,31 +30,30 @@ const EditBlog = () => {
     StepTitle(editresponse.data.title);
     StepCategory(editresponse.data.category);
     StepDesc(editresponse.data.desc);
-    SetImage1(editresponse.data.images);
-    SetImage2(editresponse.data.img);
+    SetImage(editresponse.data.picture);
   };
-
   const editUserdata = async (e) => {
     e.preventDefault();
-    console.log(file, "ttile");
     const formData = new FormData();
-    formData.append("image1", file);
-    formData.append("image2", file2);
+    if (File) {
+      formData.append("image", File);
+    }
     formData.append("title", Title);
     formData.append("desc", Desc);
     formData.append("category", Category);
     const editresponse = await axios({
       method: "patch",
-      url: `http://localhost:8000/api/updatedata/${id}`,
+      url: `http://localhost:8000/api/updateblogdata/${id}`,
       data: formData,
     });
     if (editresponse.status === 201) {
-      alert("completeda");
+      history("/edit-blogs");
     } else {
       alert("Category Not Submitted");
     }
   };
 
+  // Render API
   useEffect(() => {
     getsingledata();
   }, []);
@@ -91,36 +88,9 @@ const EditBlog = () => {
               />
             </div>
             <img
-              src={imagenew1}
+              src={image}
               alt="new"
-              className="w-full blod-edit-img"
-              crossOrigin="true"
-            />
-          </div>
-          <div className="w-full">
-            <label className="fsize13 textforth">Image</label>
-            <div className="relative">
-              <div className="border-images side-input mtpx3">
-                <div className="text-center flex justify-center">
-                  <div>
-                    <FeatherIcon icon="upload-cloud" size={35} />
-                    <p className="textforth">Upload Here</p>
-                  </div>
-                </div>
-              </div>
-              <input
-                className="absolute top-0 left-0 img-input h-full fsize13 rounded-5 plpx10 border-ec"
-                placeholder="Enter"
-                type="file"
-                onChange={handleFileChange2}
-                name="img2"
-                id="img2"
-              />
-            </div>
-            <img
-              src={imagenew2}
-              alt="new"
-              className="w-full blod-edit-img"
+              className="mtpx8 bg-fa editview-img object-contain"
               crossOrigin="true"
             />
           </div>
